@@ -11,7 +11,6 @@ function Logout() {
     })
       .then(() => cookie.remove("token", { expires: 1 }))
       .catch((err) => console.log(err));
-
     window.location = "/";
   };
   return (

@@ -22,11 +22,12 @@ export const updateBio = createAsyncThunk(
 );
 
 export const getUsers = createAsyncThunk("getUsers/user", async () => {
-  const response = await axios({
-    method: "get",
-    url: "http://localhost:5000/api/users",
-    withCredentials: true,
-  });
+  const response = await axios.get("http://localhost:5000/api/users");
+  // const response = await axios({
+  //   method: "get",
+  //   url: "http://localhost:5000/api/users",
+  //   withCredentials: true,
+  // });
   return response.data;
 });
 
@@ -34,14 +35,17 @@ export const follow = createAsyncThunk(
   "follow/user",
   async ({ id, idToFollow }, { rejectWithValue }) => {
     try {
-      await axios({
-        method: "patch",
-        url: `http://localhost:5000/api/users/follow/${id}`,
-        withCredentials: true,
-        data: {
-          idToFollow,
-        },
+      await axios.patch(`http://localhost:5000/api/users/follow/${id}`, {
+        idToFollow,
       });
+      // await axios({
+      //   method: "patch",
+      //   url: `http://localhost:5000/api/users/follow/${id}`,
+      //   withCredentials: true,
+      //   data: {
+      //     idToFollow,
+      //   },
+      // });
       return idToFollow;
     } catch (err) {
       console.log(err.response.data.message);
@@ -54,14 +58,17 @@ export const unFollow = createAsyncThunk(
   "follow/user",
   async ({ id, idToUnfollow }, { rejectWithValue }) => {
     try {
-      await axios({
-        method: "patch",
-        url: `http://localhost:5000/api/users/unfollow/${id}`,
-        withCredentials: true,
-        data: {
-          idToUnfollow,
-        },
+      await axios.patch(`http://localhost:5000/api/users/unfollow/${id}`, {
+        idToUnfollow,
       });
+      // await axios({
+      //   method: "patch",
+      //   url: `http://localhost:5000/api/users/unfollow/${id}`,
+      //   withCredentials: true,
+      //   data: {
+      //     idToUnfollow,
+      //   },
+      // });
       return idToUnfollow;
     } catch (err) {
       console.log(err.response.data.message);
